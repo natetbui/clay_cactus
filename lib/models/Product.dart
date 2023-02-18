@@ -23,12 +23,12 @@ import 'package:amplify_core/amplify_core.dart';
 import 'package:flutter/foundation.dart';
 
 
-/** This is an auto generated class representing the Item type in your schema. */
+/** This is an auto generated class representing the Product type in your schema. */
 @immutable
-class Item extends Model {
-  static const classType = const _ItemModelType();
+class Product extends Model {
+  static const classType = const _ProductModelType();
   final String id;
-  final String? _Name;
+  final String _Name;
   final double? _Price;
   final String? _Description;
   final TemporalDateTime? _createdAt;
@@ -41,13 +41,13 @@ class Item extends Model {
   @override
   String getId() => id;
   
-  ItemModelIdentifier get modelIdentifier {
-      return ItemModelIdentifier(
+  ProductModelIdentifier get modelIdentifier {
+      return ProductModelIdentifier(
         id: id
       );
   }
   
-  String? get Name {
+  String get Name {
     return _Name;
   }
   
@@ -67,10 +67,10 @@ class Item extends Model {
     return _updatedAt;
   }
   
-  const Item._internal({required this.id, Name, Price, Description, createdAt, updatedAt}): _Name = Name, _Price = Price, _Description = Description, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Product._internal({required this.id, Name, Price, Description, createdAt, updatedAt}): _Name = Name, _Price = Price, _Description = Description, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Item({String? id, String? Name, double? Price, String? Description}) {
-    return Item._internal(
+  factory Product({String? id, String? Name, double? Price, String? Description}) {
+    return Product._internal(
       id: id == null ? UUID.getUUID() : id,
       Name: Name,
       Price: Price,
@@ -84,7 +84,7 @@ class Item extends Model {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Item &&
+    return other is Product &&
       id == other.id &&
       _Name == other._Name &&
       _Price == other._Price &&
@@ -98,7 +98,7 @@ class Item extends Model {
   String toString() {
     var buffer = new StringBuffer();
     
-    buffer.write("Item {");
+    buffer.write("Product {");
     buffer.write("id=" + "$id" + ", ");
     buffer.write("Name=" + "$_Name" + ", ");
     buffer.write("Price=" + (_Price != null ? _Price!.toString() : "null") + ", ");
@@ -110,15 +110,15 @@ class Item extends Model {
     return buffer.toString();
   }
   
-  Item copyWith({String? Name, double? Price, String? Description}) {
-    return Item._internal(
+  Product copyWith({String? Name, double? Price, String? Description}) {
+    return Product._internal(
       id: id,
       Name: Name ?? this.Name,
       Price: Price ?? this.Price,
       Description: Description ?? this.Description);
   }
   
-  Item.fromJson(Map<String, dynamic> json)  
+  Product.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
       _Name = json['Name'],
       _Price = (json['Price'] as num?)?.toDouble(),
@@ -134,14 +134,14 @@ class Item extends Model {
     'id': id, 'Name': _Name, 'Price': _Price, 'Description': _Description, 'createdAt': _createdAt, 'updatedAt': _updatedAt
   };
 
-  static final QueryModelIdentifier<ItemModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<ItemModelIdentifier>();
+  static final QueryModelIdentifier<ProductModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<ProductModelIdentifier>();
   static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField NAME = QueryField(fieldName: "Name");
   static final QueryField PRICE = QueryField(fieldName: "Price");
   static final QueryField DESCRIPTION = QueryField(fieldName: "Description");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
-    modelSchemaDefinition.name = "Item";
-    modelSchemaDefinition.pluralName = "Items";
+    modelSchemaDefinition.name = "Product";
+    modelSchemaDefinition.pluralName = "Products";
     
     modelSchemaDefinition.authRules = [
       AuthRule(
@@ -157,19 +157,19 @@ class Item extends Model {
     modelSchemaDefinition.addField(ModelFieldDefinition.id());
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Item.NAME,
+      key: Product.NAME,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Item.PRICE,
+      key: Product.PRICE,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.double)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Item.DESCRIPTION,
+      key: Product.DESCRIPTION,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
@@ -190,30 +190,30 @@ class Item extends Model {
   });
 }
 
-class _ItemModelType extends ModelType<Item> {
-  const _ItemModelType();
+class _ProductModelType extends ModelType<Product> {
+  const _ProductModelType();
   
   @override
-  Item fromJson(Map<String, dynamic> jsonData) {
-    return Item.fromJson(jsonData);
+  Product fromJson(Map<String, dynamic> jsonData) {
+    return Product.fromJson(jsonData);
   }
   
   @override
   String modelName() {
-    return 'Item';
+    return 'Product';
   }
 }
 
 /**
  * This is an auto generated class representing the model identifier
- * of [Item] in your schema.
+ * of [Product] in your schema.
  */
 @immutable
-class ItemModelIdentifier implements ModelIdentifier<Item> {
+class ProductModelIdentifier implements ModelIdentifier<Product> {
   final String id;
 
-  /** Create an instance of ItemModelIdentifier using [id] the primary key. */
-  const ItemModelIdentifier({
+  /** Create an instance of ProductModelIdentifier using [id] the primary key. */
+  const ProductModelIdentifier({
     required this.id});
   
   @override
@@ -231,7 +231,7 @@ class ItemModelIdentifier implements ModelIdentifier<Item> {
   String serializeAsString() => serializeAsMap().values.join('#');
   
   @override
-  String toString() => 'ItemModelIdentifier(id: $id)';
+  String toString() => 'ProductModelIdentifier(id: $id)';
   
   @override
   bool operator ==(Object other) {
@@ -239,7 +239,7 @@ class ItemModelIdentifier implements ModelIdentifier<Item> {
       return true;
     }
     
-    return other is ItemModelIdentifier &&
+    return other is ProductModelIdentifier &&
       id == other.id;
   }
   

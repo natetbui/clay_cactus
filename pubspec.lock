@@ -18,7 +18,7 @@ packages:
     source: hosted
     version: "0.6.12"
   amplify_datastore_plugin_interface:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: amplify_datastore_plugin_interface
       sha256: "52c86859546f6da3ad547b23b4fe5cd38ea3584aefddeab301c5475eb6d1bcf2"
