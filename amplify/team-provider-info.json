@@ -13,7 +13,14 @@
     },
     "categories": {
       "auth": {
-        "claycactus713cd5fa": {}
+        "claycactus713cd5fa": {},
+        "claycactus747c3c40": {}
+      },
+      "api": {
+        "claycactus": {}
+      },
+      "storage": {
+        "products": {}
       }
     }
   }

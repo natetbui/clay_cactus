@@ -1,6 +1,8 @@
-type Item @model @auth(rules: [{allow: public}]) {
+type Product @model @auth(rules: [{allow: public}]) {
   id: ID!
-  Name: String
-  Price: Float
-  Description: String
+  name: String
+  price: Int
+  description: String
+  imageUrl: String
 }
+ 

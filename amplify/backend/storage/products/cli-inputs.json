@@ -1,0 +1,14 @@
+{
+  "resourceName": "products",
+  "policyUUID": "8b6d2e41",
+  "bucketName": "products",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

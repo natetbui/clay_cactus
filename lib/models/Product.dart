@@ -28,9 +28,10 @@ import 'package:flutter/foundation.dart';
 class Product extends Model {
   static const classType = const _ProductModelType();
   final String id;
-  final String _Name;
-  final double? _Price;
-  final String? _Description;
+  final String? _name;
+  final int? _price;
+  final String? _description;
+  final String? _imageUrl;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
@@ -47,16 +48,20 @@ class Product extends Model {
       );
   }
   
-  String get Name {
-    return _Name;
+  String? get name {
+    return _name;
   }
   
-  double? get Price {
-    return _Price;
+  int? get price {
+    return _price;
   }
   
-  String? get Description {
-    return _Description;
+  String? get description {
+    return _description;
+  }
+  
+  String? get imageUrl {
+    return _imageUrl;
   }
   
   TemporalDateTime? get createdAt {
@@ -67,14 +72,15 @@ class Product extends Model {
     return _updatedAt;
   }
   
-  const Product._internal({required this.id, Name, Price, Description, createdAt, updatedAt}): _Name = Name, _Price = Price, _Description = Description, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Product._internal({required this.id, name, price, description, imageUrl, createdAt, updatedAt}): _name = name, _price = price, _description = description, _imageUrl = imageUrl, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Product({String? id, String? Name, double? Price, String? Description}) {
+  factory Product({String? id, String? name, int? price, String? description, String? imageUrl}) {
     return Product._internal(
       id: id == null ? UUID.getUUID() : id,
-      Name: Name,
-      Price: Price,
-      Description: Description);
+      name: name,
+      price: price,
+      description: description,
+      imageUrl: imageUrl);
   }
   
   bool equals(Object other) {
@@ -86,9 +92,10 @@ class Product extends Model {
     if (identical(other, this)) return true;
     return other is Product &&
       id == other.id &&
-      _Name == other._Name &&
-      _Price == other._Price &&
-      _Description == other._Description;
+      _name == other._name &&
+      _price == other._price &&
+      _description == other._description &&
+      _imageUrl == other._imageUrl;
   }
   
   @override
@@ -100,9 +107,10 @@ class Product extends Model {
     
     buffer.write("Product {");
     buffer.write("id=" + "$id" + ", ");
-    buffer.write("Name=" + "$_Name" + ", ");
-    buffer.write("Price=" + (_Price != null ? _Price!.toString() : "null") + ", ");
-    buffer.write("Description=" + "$_Description" + ", ");
+    buffer.write("name=" + "$_name" + ", ");
+    buffer.write("price=" + (_price != null ? _price!.toString() : "null") + ", ");
+    buffer.write("description=" + "$_description" + ", ");
+    buffer.write("imageUrl=" + "$_imageUrl" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -110,35 +118,38 @@ class Product extends Model {
     return buffer.toString();
   }
   
-  Product copyWith({String? Name, double? Price, String? Description}) {
+  Product copyWith({String? name, int? price, String? description, String? imageUrl}) {
     return Product._internal(
       id: id,
-      Name: Name ?? this.Name,
-      Price: Price ?? this.Price,
-      Description: Description ?? this.Description);
+      name: name ?? this.name,
+      price: price ?? this.price,
+      description: description ?? this.description,
+      imageUrl: imageUrl ?? this.imageUrl);
   }
   
   Product.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
-      _Name = json['Name'],
-      _Price = (json['Price'] as num?)?.toDouble(),
-      _Description = json['Description'],
+      _name = json['name'],
+      _price = (json['price'] as num?)?.toInt(),
+      _description = json['description'],
+      _imageUrl = json['imageUrl'],
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'Name': _Name, 'Price': _Price, 'Description': _Description, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'name': _name, 'price': _price, 'description': _description, 'imageUrl': _imageUrl, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
-    'id': id, 'Name': _Name, 'Price': _Price, 'Description': _Description, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+    'id': id, 'name': _name, 'price': _price, 'description': _description, 'imageUrl': _imageUrl, 'createdAt': _createdAt, 'updatedAt': _updatedAt
   };
 
   static final QueryModelIdentifier<ProductModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<ProductModelIdentifier>();
   static final QueryField ID = QueryField(fieldName: "id");
-  static final QueryField NAME = QueryField(fieldName: "Name");
-  static final QueryField PRICE = QueryField(fieldName: "Price");
-  static final QueryField DESCRIPTION = QueryField(fieldName: "Description");
+  static final QueryField NAME = QueryField(fieldName: "name");
+  static final QueryField PRICE = QueryField(fieldName: "price");
+  static final QueryField DESCRIPTION = QueryField(fieldName: "description");
+  static final QueryField IMAGEURL = QueryField(fieldName: "imageUrl");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Product";
     modelSchemaDefinition.pluralName = "Products";
@@ -165,11 +176,17 @@ class Product extends Model {
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
       key: Product.PRICE,
       isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.double)
+      ofType: ModelFieldType(ModelFieldTypeEnum.int)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
       key: Product.DESCRIPTION,
+      isRequired: false,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Product.IMAGEURL,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
